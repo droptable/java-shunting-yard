@@ -34,7 +34,7 @@ public class Token
 		T_NUMBER      = 1,  // eine nummer (integer / double)
 		T_IDENT       = 2,  // konstante
 		T_FUNCTION    = 4,  // funktion
-	    T_POPEN       = 8,  // (
+		T_POPEN       = 8,  // (
 	    T_PCLOSE      = 16,  // )
 	    T_COMMA       = 32, // ,
 	    T_OPERATOR    = 64, // operator (derzeit ungenutzt)
