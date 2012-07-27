@@ -63,7 +63,7 @@ public class Parser
 			this.handle(t);
 		
 		// When there are no more tokens to read:
-	    // While there are still operator tokens in the stack:
+		// While there are still operator tokens in the stack:
 		while ((t = this.stack.pop()) != null) {
 			if (t.type == Token.T_POPEN || t.type == Token.T_PCLOSE)
 				throw new ParseError("fehlerhafte verschachtelung von `(` und `)`");
@@ -112,14 +112,14 @@ public class Parser
 					
 					Token rhs = this.stack.pop();
 					Token lhs = null;
-			          
+								          
 					if (na > 1) lhs = this.stack.pop();
-			           
+								           
 					len -= (na - 1);
 					
-			        // Push the returned results, if any, back onto the stack.
-			        this.stack.push(new Number(this.op(t.type, lhs, rhs), Token.T_NUMBER));
-			        break;
+					// Push the returned results, if any, back onto the stack.
+					this.stack.push(new Number(this.op(t.type, lhs, rhs), Token.T_NUMBER));
+					break;
 				}
 				
 				case Token.T_FUNCTION: {
