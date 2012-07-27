@@ -80,7 +80,7 @@ public class Parser
 		Token t;
 		
 		// While there are input tokens left
-	    // Read the next token from input.
+		// Read the next token from input.
 		while ((t = this.queue.shift()) != null) {
 			switch (t.type) {
 				case Token.T_NUMBER:
@@ -89,7 +89,7 @@ public class Parser
 						t = new Number(ctx.cs(((Ident) t).value), Token.T_NUMBER);
 					
 					// If the token is a value or identifier
-			        // Push it onto the stack.
+					// Push it onto the stack.
 					this.stack.push(t);
 					++len;
 					break;
@@ -111,12 +111,12 @@ public class Parser
 						throw new RuntimeError("zu wenig token für operator `" + ((Operator) t).value + "`");
 					
 					Token rhs = this.stack.pop();
-			        Token lhs = null;
+					Token lhs = null;
 			          
-			        if (na > 1) lhs = this.stack.pop();
+					if (na > 1) lhs = this.stack.pop();
 			           
-			        len -= (na - 1);
-			        
+					len -= (na - 1);
+					
 			        // Push the returned results, if any, back onto the stack.
 			        this.stack.push(new Number(this.op(t.type, lhs, rhs), Token.T_NUMBER));
 			        break;
@@ -212,7 +212,7 @@ public class Parser
 				return 2;
 		}
 	    
-	    return 1;
+		return 1;
 	}
 	
 	protected void fargs(Token fn) throws ParseError
