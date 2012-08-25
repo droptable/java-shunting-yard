@@ -26,96 +26,66 @@
  * <http://opensource.org/licenses/mit-license.php>
  */
 
-package com.rr.term_parser;
+package ws.raidrush.shunt;
 
-import java.util.Vector;
+import java.util.Map;
+import java.util.HashMap;
 
-import com.rr.term_parser.Token;
-
-// wir brauchen: push(), pop(), shift(), unshift(), peek(), first(), last(), prev() und next()
-// wenn es so eine klasse im irrgarten von java geben solle
-// bitte mir kurz bescheid geben :-D
-
-public class Stack
+public class Context 
 {
-	protected Vector<Token> stack;
-	protected int idx = -1;
+	protected Map<String, Function> functionTable;
+	protected Map<String, Symbol>   constantTable;
+	protected Map<String, Symbol>   symbolTable;
 	
-	public Stack()
+	public Context()
 	{
-		this.stack = new Vector<Token>();
-	}
-	
-	public int size()
-	{
-		return this.stack.size();
-	}
-	
-	public Token first()
-	{
-		if (this.stack.size() == 0)
-			return null;
+		functionTable = new HashMap<String, Function>();
+		constantTable = new HashMap<String, Symbol>();
+		symbolTable   = new HashMap<String, Symbol>();
 		
-		return this.stack.firstElement();
+		// define PI
+		constantTable.put("PI", new Symbol(Math.PI, true));
 	}
 	
-	public Token last()
+	public Function getFunction(String name) throws RuntimeError
 	{
-		if (this.stack.size() == 0)
-			return null;
+		if (!functionTable.containsKey(name))
+			throw new RuntimeError("undefinierte funktion \"" + name + "\"");
 		
-		return this.stack.lastElement();
+		return functionTable.get(name);
 	}
 	
-	public Token peek()
+	public Symbol getConstant(String name) throws RuntimeError
 	{
-		if (this.idx + 1 >= this.stack.size())
-			return null;
+		if (!constantTable.containsKey(name))
+			throw new RuntimeError("undefinierte konstante \"" + name + "\"");
 		
-		return this.stack.get(this.idx + 1);
+		return constantTable.get(name);
 	}
 	
-	public Token next()
+	public Symbol getSymbol(String name) throws RuntimeError 
+  {
+    if (!symbolTable.containsKey(name))
+      throw new RuntimeError("undefiniertes symbol \"" + name + "\"");
+      
+    return symbolTable.get(name);
+  }
+	
+	public Context setConstant(String name, Symbol value)
 	{
-		if (this.idx + 1 >= this.stack.size())
-			return null;
-		
-		return this.stack.get(++this.idx);
+	  value.readonly = true;
+	  return setSymbol(name, value);
 	}
 	
-	public Token prev()
+	public Context setFunction(String name, Function value)
 	{
-		if (this.idx - 1 < 0)
-			return null;
-		
-		return this.stack.get(--this.idx);
+		functionTable.put(name, value);
+		return this;
 	}
 	
-	public int push(Token value)
+	public Context setSymbol(String name, Symbol value)
 	{
-		this.stack.add(value);
-		return this.stack.size();
-	}
-	
-	public int unshift(Token value)
-	{
-		this.stack.add(0, value);
-		return this.stack.size();
-	}
-	
-	public Token pop()
-	{
-		int size = this.stack.size();
-		if (size == 0) return null;
-		
-		return this.stack.remove(size - 1);
-	}
-	
-	public Token shift()
-	{
-		if (this.stack.size() == 0)
-			return null;
-		
-		return this.stack.remove(0);
+	  symbolTable.put(name, value);
+	  return this;
 	}
 }

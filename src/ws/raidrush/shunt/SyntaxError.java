@@ -26,9 +26,14 @@
  * <http://opensource.org/licenses/mit-license.php>
  */
 
-package com.rr.term_parser;
+package ws.raidrush.shunt;
 
-public interface Function 
+public class SyntaxError extends Exception 
 {
-	public double call(double[] args);
+	private static final long serialVersionUID = -1516302500127099350L;
+	
+	public SyntaxError(String msg)
+	{
+		super(msg);
+	}
 }

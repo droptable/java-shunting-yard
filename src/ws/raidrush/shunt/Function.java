@@ -26,14 +26,9 @@
  * <http://opensource.org/licenses/mit-license.php>
  */
 
-package com.rr.term_parser;
+package ws.raidrush.shunt;
 
-public class ParseError extends Exception
+public interface Function 
 {
-	private static final long serialVersionUID = 5656855490029443605L;
-	
-	public ParseError(String msg)
-	{
-		super(msg);
-	}
+	public Symbol call(Symbol[] args);
 }

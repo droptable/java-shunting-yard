@@ -26,17 +26,14 @@
  * <http://opensource.org/licenses/mit-license.php>
  */
 
-package com.rr.term_parser;
+package ws.raidrush.shunt;
 
-import com.rr.term_parser.Token;
-
-public class Number extends Token
+public class RuntimeError extends Exception 
 {
-	public double value;
+	private static final long serialVersionUID = 1133380765616725226L;
 	
-	public Number(double value, short type)
+	public RuntimeError(String msg)
 	{
-		this.value = value;
-		this.type  = type;
+		super(msg);
 	}
 }

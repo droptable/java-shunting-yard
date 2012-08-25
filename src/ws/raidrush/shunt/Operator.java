@@ -26,27 +26,15 @@
  * <http://opensource.org/licenses/mit-license.php>
  */
 
-package com.rr.term_parser;
+package ws.raidrush.shunt;
 
-public class Token 
+public class Operator extends Token
 {
-	public static final short 
-		T_NUMBER      = 1,  // eine nummer (integer / double)
-		T_IDENT       = 2,  // konstante
-		T_FUNCTION    = 4,  // funktion
-		T_POPEN       = 8,  // (
-		T_PCLOSE      = 16,  // )
-		T_COMMA       = 32, // ,
-		T_OPERATOR    = 64, // operator (derzeit ungenutzt)
-		T_PLUS        = 65, // +
-		T_MINUS       = 66, // -
-		T_TIMES       = 67, // * 
-		T_DIV         = 68, // /
-		T_MOD         = 69, // %
-		T_POW         = 70, // ^
-		T_UNARY_PLUS  = 71, // + als vorzeichen (zur übersetzungszeit ermittelt)
-		T_UNARY_MINUS = 72, // - als vorzeichen (zur übersetzungszeit ermittelt)
-		T_NOT         = 73; // ! als vorzeichen
+	public String value;
 	
-	public short type;
+	public Operator(String value, short type)
+	{
+		this.value = value;
+		this.type  = type;
+	}
 }

@@ -26,18 +26,31 @@
  * <http://opensource.org/licenses/mit-license.php>
  */
 
-package com.rr.term_parser;
+package ws.raidrush.shunt;
 
-import com.rr.term_parser.Token;
-
-public class Ident extends Token
+public class Token 
 {
-	public String value;
-	public int argc = 0;
+	public static final short 
+		T_NUMBER       = 1,   // eine nummer (integer / double)
+		T_IDENT        = 2,   // konstante
+		T_FUNCTION     = 3,   // funktion
+		T_POPEN        = 4,   // (
+		T_PCLOSE       = 5,   // )
+		T_RIDENT       = 8,   // ident vor = (R -> right)
+		T_STRING       = 9,   // string
+		T_OPERATOR     = 128, // operator
+		T_PLUS         = 129, // +
+		T_MINUS        = 130, // -
+		T_TIMES        = 131, // * 
+		T_DIV          = 132, // /
+		T_MOD          = 133, // %
+		T_POW          = 134, // ^
+		T_UNARY_PLUS   = 135, // + als vorzeichen (zur übersetzungszeit ermittelt)
+		T_UNARY_MINUS  = 136, // - als vorzeichen (zur übersetzungszeit ermittelt)
+		T_NOT          = 137, // ! als vorzeichen
+		T_SEMI         = 138, // ;
+		T_COMMA        = 139, // ,
+		T_ASSIGN       = 140; // =
 	
-	public Ident(String value, short type)
-	{
-		this.value = value;
-		this.type  = type;
-	}
+	public short type;
 }

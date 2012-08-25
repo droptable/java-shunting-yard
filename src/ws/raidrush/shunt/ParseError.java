@@ -26,49 +26,14 @@
  * <http://opensource.org/licenses/mit-license.php>
  */
 
-package com.rr.term_parser;
+package ws.raidrush.shunt;
 
-import java.util.Map;
-import java.util.HashMap;
-
-import com.rr.term_parser.Function;
-
-public class Context 
+public class ParseError extends Exception
 {
-	protected Map<String, Function> fnt;
-	protected Map<String, Double> cst;
+	private static final long serialVersionUID = 5656855490029443605L;
 	
-	public Context()
+	public ParseError(String msg)
 	{
-		this.fnt = new HashMap<String, Function>();
-		this.cst = new HashMap<String, Double>();
-	}
-	
-	public double fn(String name, double[] args) throws RuntimeError
-	{
-		if (!this.fnt.containsKey(name))
-			throw new RuntimeError("undefinierte funktion \"" + name + "\"");
-		
-		return this.fnt.get(name).call(args);
-	}
-	
-	public double cs(String name) throws RuntimeError
-	{
-		if (!this.cst.containsKey(name))
-			throw new RuntimeError("undefinierte konstante \"" + name + "\"");
-		
-		return this.cst.get(name);
-	}
-	
-	public Context def(String name, double value)
-	{
-		this.cst.put(name, value);
-		return this;
-	}
-	
-	public Context def(String name, Function value)
-	{
-		this.fnt.put(name, value);
-		return this;
+		super(msg);
 	}
 }

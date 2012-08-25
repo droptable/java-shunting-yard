@@ -26,14 +26,16 @@
  * <http://opensource.org/licenses/mit-license.php>
  */
 
-package com.rr.term_parser;
+package ws.raidrush.shunt;
 
-public class SyntaxError extends Exception 
+public class Ident extends Token
 {
-	private static final long serialVersionUID = -1516302500127099350L;
+	public String value;
+	public int argc = 0;
 	
-	public SyntaxError(String msg)
+	public Ident(String value, short type)
 	{
-		super(msg);
+		this.value = value;
+		this.type  = type;
 	}
 }

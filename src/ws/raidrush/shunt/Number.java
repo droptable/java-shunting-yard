@@ -26,36 +26,15 @@
  * <http://opensource.org/licenses/mit-license.php>
  */
 
-package com.rr.term_parser;
+package ws.raidrush.shunt;
 
-import com.rr.term_parser.Parser;
-import com.rr.term_parser.Context;
-import com.rr.term_parser.Function;
-
-public class Main 
+public class Number extends Token
 {
-	public static void main(String[] args)
+	public double value;
+	
+	public Number(double value, short type)
 	{
-		if (args.length < 1)
-			return;
-		
-		Context ctx = new Context();
-		
-		ctx.def("foo", 1.);
-		ctx.def("bar", new Function() {
-			public double call(double[] args) {
-				return args[0] + args[1];
-			}
-		});
-		
-		try {
-			System.out.println(Parser.parse(args[0], ctx));
-		} catch (ParseError e) {
-			System.out.println("parse error: " + e.getMessage());
-		} catch (SyntaxError e) {
-			System.out.println("syntax error: " + e.getMessage());
-		} catch (RuntimeError e) {
-			System.out.println("runtime error: " + e.getMessage());
-		}
+		this.value = value;
+		this.type  = type;
 	}
 }
